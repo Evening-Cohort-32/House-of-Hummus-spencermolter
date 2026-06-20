@@ -1,0 +1,25 @@
+erDiagram
+    ENTREES {
+        int id PK
+        string name
+        decimal price
+    }
+    VEGETABLES {
+        int id PK
+        string type
+        decimal price
+    }
+    SIDES {
+        int id PK
+        string title
+        decimal price
+    }
+    PURCHASES {
+        int id PK
+        int entreeId FK
+        int vegetableId FK
+        int sideId FK
+    }
+    ENTREES ||--o{ PURCHASES : "includes"
+    VEGETABLES ||--o{ PURCHASES : "includes"
+    SIDES ||--o{ PURCHASES : "includes"

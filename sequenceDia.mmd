@@ -1,0 +1,32 @@
+sequenceDiagram
+    participant Main
+    participant Entrees
+    participant Vegetables
+    participant Sides
+    participant TranState
+    participant API as "API/Database"
+
+    Main->>Entrees: Get entree options
+    Entrees->>API: GET entrees data
+    API-->>Entrees: Return entrees array
+    Entrees-->>Main: Radio button event for entrees
+
+    Main->>Vegetables: Get vegetable options
+    Vegetables->>API: GET vegetables data
+    API-->>Vegetables: Return vegetables array
+    Vegetables-->>Main: Radio button event for veggies
+
+    Main->>Sides: Get side options
+    Sides->>API: GET sides data
+    API-->>Sides: Return sides array
+    Sides-->>Main: Radio button event for sides
+
+    Note over Main, TranState: User clicks options
+    Main->>TranState: Save entreeChoice / vegChoice / sideChoice
+
+    Note over Main, TranState: User clicks "Purchase Combo"
+    Main->>TranState: orderPlaced()
+    TranState->>API: POST tState order
+    API-->>TranState: Order saved
+    TranState-->>Main: transmit "stateChanged"
+    Main->>Main: Render page
